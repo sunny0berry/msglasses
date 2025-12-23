@@ -104,11 +104,41 @@ button {
 /* Main (clickable) thumbnail */
 .chapter-thumbnails .main {
   /* remove transform scale on hover here */
-  cursor: pointer; /* keep pointer to show hover state */
+  cursor: none; /* keep pointer to show hover state */
 }
 
 /* Hover effect on main thumbnail */
 .chapter-thumbnails .main:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 10px rgba(255,255,255,0.5);
+}
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #222;
+  color: white;
+  font-size: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   cursor: none; /* hide default pointer */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  opacity: 0;               /* hidden initially */
+  pointer-events: none;      /* prevent clicks when hidden */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+.scroll-top.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.scroll-top:hover {
+  background: #ff0000;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(255,255,255,0.4);
 }
