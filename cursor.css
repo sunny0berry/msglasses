@@ -1,30 +1,25 @@
-/* Remove default cursor */
-body {
+/* Hide default cursor everywhere */
+* {
   cursor: none;
-  font-family: Arial, sans-serif;
-  padding: 50px;
 }
 
 /* Custom cursor */
 .cursor {
   width: 20px;
   height: 20px;
-  border: 2px solid black;
+  border: 2px solid #000;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   transform: translate(-50%, -50%);
   transition: transform 0.15s ease, width 0.15s, height 0.15s;
+  z-index: 9999;
 }
 
-/* Hover effect */
+/* Hover effect for links & buttons */
+a:hover ~ .cursor,
 button:hover ~ .cursor {
   width: 40px;
   height: 40px;
   border-color: red;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
 }
