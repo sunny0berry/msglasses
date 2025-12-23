@@ -1,6 +1,10 @@
-/* Remove default cursor */
-body {
+/* Hide default cursor everywhere */
+* {
   cursor: none;
+}
+
+/* Page styling (not related to cursor) */
+body {
   font-family: Arial, sans-serif;
   padding: 50px;
 }
@@ -12,13 +16,16 @@ body {
   border: 2px solid black;
   border-radius: 50%;
   position: fixed;
+  top: 0;
+  left: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, width 0.15s, height 0.15s;
+  transition: width 0.15s ease, height 0.15s ease, border-color 0.15s ease;
+  z-index: 9999;
 }
 
-/* Hover effect */
-button:hover ~ .cursor {
+/* Cursor effect on hover */
+.cursor.active {
   width: 40px;
   height: 40px;
   border-color: red;
