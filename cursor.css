@@ -1,15 +1,23 @@
-/* Hide default cursor everywhere */
-* {
-  cursor: none;
-  
+/* ===============================
+   Desktop cursor only
+   =============================== */
+@media (pointer: fine) {
+  * {
+    cursor: none;
+  }
 }
 
-/* Page styling (not related to cursor) */
+/* ===============================
+   Base page styles
+   =============================== */
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
 }
 
-/* Custom cursor */
+/* ===============================
+   Custom cursor
+   =============================== */
 .cursor {
   width: 20px;
   height: 20px;
@@ -20,21 +28,29 @@ body {
   left: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: width 0.15s ease, height 0.15s ease, border-color 0.15s ease;
+  transition: all 0.15s ease;
   z-index: 9999;
 }
 
-/* Cursor effect on hover */
 .cursor.active {
   width: 40px;
   height: 40px;
   border-color: red;
 }
-/* Header */
+
+/* Hide cursor completely on touch */
+@media (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}
+
+/* ===============================
+   Header
+   =============================== */
 .chapter-header {
   text-align: center;
   padding: 20px 10px;
-    margin-bottom: 20px;
 }
 
 .chapter-header h1 {
@@ -43,75 +59,60 @@ body {
 
 .chapter-header p {
   color: #aaa;
-  margin-top: 5px;
 }
 
-/* Main chapter container */
+/* ===============================
+   Chapter images
+   =============================== */
 .chapter-container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Manhwa images */
 .chapter-container img {
   width: 100%;
   display: block;
 }
 
-/* Navigation */
-.chapter-nav {
-  display: flex;
-  justify-content: space-between;
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 10px;
-}
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-}
+/* ===============================
+   Thumbnails
+   =============================== */
 .chapter-thumbnails {
   display: flex;
   justify-content: space-between;
-  width: 100vw;  
-  margin: 30px auto;
-  margin-bottom: 50px;
-  padding: 0; /* edge images touch sides */
-  gap: 10px;    /* small spacing between images */
+  width: 100vw;
+  margin: 30px 0 50px;
+  gap: 10px;
 }
 
-.chapter-thumbnails .thumb {
+.thumb {
   transition: transform 0.3s ease, box-shadow 0.2s ease;
+  object-fit: cover;
 }
 
-/* Edge images touch sides */
-.chapter-thumbnails .edge,
-.chapter-thumbnails .main {
-  height: 200px; /* or any fixed value you like */
-  object-fit: cover; /* ensures image fills box without distortion */
-}
-.chapter-thumbnails .edge {
-  width: 15vw;  /* adjusts with viewport */
+.edge {
+  width: 15vw;
+  height: 200px;
 }
 
-.chapter-thumbnails .small {
+.small {
   width: 8vw;
+  height: 200px;
 }
 
-.chapter-thumbnails .main {
+.main {
   width: 400px;
-}
-/* Main (clickable) thumbnail */
-.chapter-thumbnails .main {
-  /* remove transform scale on hover here */
-  cursor: none; /* keep pointer to show hover state */
+  height: 200px;
 }
 
-/* Hover effect on main thumbnail */
-.chapter-thumbnails .main:hover {
+.main:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 10px rgba(255,255,255,0.5);
 }
+
+/* ===============================
+   Scroll to top
+   =============================== */
 .scroll-top {
   position: fixed;
   bottom: 20px;
@@ -125,11 +126,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-   cursor: none; /* hide default pointer */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  opacity: 0;               /* hidden initially */
-  pointer-events: none;      /* prevent clicks when hidden */
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
   z-index: 1000;
 }
 
@@ -137,8 +136,55 @@ button {
   opacity: 1;
   pointer-events: auto;
 }
+
 .scroll-top:hover {
-  background: #ff0000;
+  background: red;
   transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(255,255,255,0.4);
+}
+
+/* ===============================
+   Mobile responsive fixes
+   =============================== */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 18px;
+  }
+
+  .chapter-header h1 {
+    font-size: 34px;
+  }
+
+  .chapter-header p {
+    font-size: 18px;
+  }
+
+  .scroll-top {
+    width: 64px;
+    height: 64px;
+    font-size: 30px;
+  }
+
+  .edge {
+    width: 22vw;
+    height: 160px;
+  }
+
+  .small {
+    width: 14vw;
+    height: 140px;
+  }
+
+  .main {
+    width: 70vw;
+    height: 200px;
+  }
+}
+
+/* Touch feedback */
+@media (pointer: coarse) {
+  .scroll-top:active,
+  .main:active {
+    transform: scale(0.95);
+  }
 }
